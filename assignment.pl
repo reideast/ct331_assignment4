@@ -6,6 +6,14 @@ isElementInList(El, [El | _]).
 isElementInList(El, [_ | Tail]) :- isElementInList(El, Tail).
 
 %Definitions for reverseList(List, ReversedList)
+% Base Case: Empty list. Only necessary to support reverseList([], X).
+reverseList([], []).
+% Base Case: Only one element left in list.
+%reverseList([El], [El]). % TODO: need to use (El, [El|[])??
+% Recursive Case: List head is removed, and head now is on the end of the new list
+reverseList([Head | Tail], NewList) :-
+    NewList = [ReversedList | Head],
+    reverseList(Tail, ReversedList).
 
 %insertElementIntoListEnd(El, List, NewList)
 
