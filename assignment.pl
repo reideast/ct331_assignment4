@@ -22,14 +22,24 @@ mergeLists([Head | Tail], List2, [Head | Merged]) :-
     mergeLists(Tail, List2, Merged).
 
 
-%insertElementIntoListEnd(El, List, NewList)
 
 %Definitions for reverseList(List, ReversedList)
+
 % Base Case: Empty list. Only necessary to support reverseList([], X).
 reverseList([], []).
+
 % Base Case: Only one element left in list.
-%reverseList([El], [El]). % TODO: need to use (El, [El|[])??
-% Recursive Case: List head is removed, and head now is on the end of the new list
-reverseList([Head | Tail], NewList) :-
-    NewList = [ReversedList | Head], % merge the lists somehow?
-    reverseList(Tail, ReversedList).
+%reverseList([El], [El]).
+% DEBUG: need to use (El, [El|[])??
+% TODO: actually maybe ([El|[]], [El])
+reverseList([Head | []], [Head]).
+
+% Recursive case: List still has head and tail. Remove head, and unify it with a merged list
+reverseList([Head | Tail], ReversedList) :-
+    mergeLists(SmallerList, [Head], ReversedList),
+    reverseList(Tail, SmallerList).
+
+
+
+%insertElementIntoListEnd(El, List, NewList)
+
