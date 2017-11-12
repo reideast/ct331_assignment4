@@ -16,7 +16,8 @@ isElementInList(El, [_ | Tail]) :-
 % Base Case: First list is now mepty. Second list is the basis of the new, merged list
 mergeLists([], List2, List2).
 
-% Recursive Case: First list still has elements. It's head (atom) onto whatever the reduced call returns as Merged will become the new merged list
+% Recursive Case: First list still has elements.
+% List1's head (an atom) onto whatever the reduced call returns as Merged will become the new merged list
 % Don't care what the second list is, but pass it on down towards the base case (the string)
 mergeLists([Head | Tail], List2, [Head | Merged]) :-
     mergeLists(Tail, List2, Merged).
@@ -25,10 +26,11 @@ mergeLists([Head | Tail], List2, [Head | Merged]) :-
 
 %Definitions for reverseList(List, ReversedList)
 
-% Base Case: Empty list. Only necessary to support reverseList([], X).
+% Base Case: Empty list; must be reversed.
 reverseList([], []).
 
 % Recursive case: List still has head and tail. Remove head, and unify it with a merged list
+% Recurse on the tail
 reverseList([Head | Tail], ReversedList) :-
     mergeLists(SmallerList, [Head], ReversedList),
     reverseList(Tail, SmallerList).
