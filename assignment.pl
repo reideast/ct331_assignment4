@@ -36,4 +36,6 @@ reverseList([Head | Tail], ReversedList) :-
 
 
 %insertElementIntoListEnd(El, List, NewList)
-
+% This one is NOT recruseive itself.
+% El is inserted into NewList IF NewList is the same as List with El merged at the end
+insertElementIntoListEnd(El, List, NewList) :- mergeLists(List, [El], NewList).
