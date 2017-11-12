@@ -28,12 +28,6 @@ mergeLists([Head | Tail], List2, [Head | Merged]) :-
 % Base Case: Empty list. Only necessary to support reverseList([], X).
 reverseList([], []).
 
-% Base Case: Only one element left in list.
-%reverseList([El], [El]).
-% DEBUG: need to use (El, [El|[])??
-% TODO: actually maybe ([El|[]], [El])
-reverseList([Head | []], [Head]).
-
 % Recursive case: List still has head and tail. Remove head, and unify it with a merged list
 reverseList([Head | Tail], ReversedList) :-
     mergeLists(SmallerList, [Head], ReversedList),
